@@ -81,11 +81,22 @@ input {
   height: 45%;
   background: linear-gradient(0deg, rgba(8, 12, 20, 0.74), transparent);
   pointer-events: none;
+  z-index: 1;
+}
+
+#heroWeather {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.95;
 }
 
 .topbar {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -155,7 +166,7 @@ input {
 
 .hero-copy {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   align-self: end;
   max-width: 720px;
   padding: 0 34px 42px;
@@ -212,7 +223,7 @@ h1 {
 
 .risk-orb {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   right: 34px;
   bottom: 42px;
   width: 186px;
@@ -320,6 +331,56 @@ h1 {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.section-info {
+  margin: 0 18px 2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.section-info summary {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 720;
+}
+
+.section-info summary::-webkit-details-marker {
+  display: none;
+}
+
+.info-dot {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(124, 199, 255, 0.42);
+  border-radius: 50%;
+  background: rgba(124, 199, 255, 0.13);
+  color: rgba(225, 244, 255, 0.92);
+  font-size: 13px;
+  font-weight: 760;
+  font-style: normal;
+}
+
+.section-info p {
+  margin: -2px 0 14px 34px;
+  max-width: 58ch;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.section-info[open] .info-dot {
+  background: rgba(124, 199, 255, 0.26);
+  box-shadow: 0 0 18px rgba(124, 199, 255, 0.16);
 }
 
 .hourly-card {

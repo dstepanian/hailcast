@@ -4,13 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HailCast</title>
+    <meta
+      name="description"
+      content="HailCast-ը կարկտի ռիսկի կենդանի կանխատեսման վեբ հավելված է՝ հայերեն հիմնական լեզվով եւ անգլերեն տարբերակով։"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HailCast" />
+    <meta
+      property="og:description"
+      content="Կարկտի ռիսկի կենդանի կանխատեսում՝ տեղանքի, ամպրոպային քարտեզի եւ եղանակային անիմացիաների միջոցով։"
+    />
+    <meta property="og:image" content="assets/site-thumbnail.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="HailCast hail forecasting app preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HailCast" />
+    <meta name="twitter:description" content="Live hail risk forecast with Armenian-first weather UX." />
+    <meta name="twitter:image" content="assets/site-thumbnail.png" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/site-thumbnail.png" />
     <link rel="preload" href="assets/storm-backdrop.png" as="image" />
-    <link rel="stylesheet" href="styles.css?v=16" />
+    <link rel="stylesheet" href="styles.css?v=17" />
   </head>
   <body>
     <canvas id="weatherWallpaper" aria-hidden="true"></canvas>
     <main class="app-shell">
       <section class="hero-panel" aria-labelledby="app-title">
+        <canvas id="heroWeather" aria-hidden="true"></canvas>
         <div class="topbar">
           <button class="icon-button" type="button" id="refreshBtn" aria-label="Թարմացնել կանխատեսումը">
             <span aria-hidden="true">↻</span>
@@ -24,10 +45,11 @@
           <div class="location-picker">
             <label for="locationSelect" id="locationLabel">Տեղանք</label>
             <select id="locationSelect" aria-label="Ընտրել կանխատեսման տեղանքը">
-              <option value="yerevan">Yerevan, Armenia</option>
-              <option value="denver">Denver, Colorado</option>
-              <option value="wichita">Wichita, Kansas</option>
-              <option value="munich">Munich, Germany</option>
+              <option value="vanadzor">Վանաձոր, Հայաստան</option>
+              <option value="aparan">Ապարան, Հայաստան</option>
+              <option value="yerevan">Երեւան, Հայաստան</option>
+              <option value="gyumri">Գյումրի, Հայաստան</option>
+              <option value="spitak">Սպիտակ, Հայաստան</option>
             </select>
           </div>
           <button class="icon-button" type="button" id="unitBtn" aria-label="Փոխել ջերմաստիճանի միավորը">
@@ -72,13 +94,22 @@
 
         <article class="glass-card map-card">
           <div class="card-heading">
-            <span id="trackerTitle">Ամպրոպային բջջի շարժ</span>
-            <small id="stormMotion">Շարժվում է ՀԱ 28 կմ/ժ</small>
+            <span id="trackerTitle">Ամպրոպների քարտեզ</span>
+            <small id="stormMotion">Շարժը՝ դեպի հյուսիս-արեւելք, 28 կմ/ժ</small>
           </div>
-          <canvas id="radarCanvas" width="760" height="520" aria-label="Շարժվող ռադարային քարտեզ"></canvas>
+          <details class="section-info">
+            <summary>
+              <span class="info-dot" aria-hidden="true">i</span>
+              <span id="mapInfoLabel">Ինչպես կարդալ քարտեզը</span>
+            </summary>
+            <p id="mapInfoText">
+              Քարտեզի գունավոր գոտիները ցույց են տալիս տեղումների եւ հնարավոր կարկտի ուժգնությունը։
+            </p>
+          </details>
+          <canvas id="radarCanvas" width="760" height="520" aria-label="Ամպրոպների կենդանի քարտեզ"></canvas>
           <div class="map-legend" aria-hidden="true">
             <span><i class="legend-low"></i><b id="legendRain">Անձրեւ</b></span>
-            <span><i class="legend-mid"></i><b id="legendCore">Միջուկ</b></span>
+            <span><i class="legend-mid"></i><b id="legendCore">Ուժեղ գոտի</b></span>
             <span><i class="legend-high"></i><b id="legendHail">Կարկուտ</b></span>
           </div>
         </article>
@@ -91,6 +122,16 @@
               <button class="mode-button" type="button" id="modeBtn">Ավտո</button>
             </div>
           </div>
+
+          <details class="section-info">
+            <summary>
+              <span class="info-dot" aria-hidden="true">i</span>
+              <span id="ingredientsInfoLabel">Ինչ է սա</span>
+            </summary>
+            <p id="ingredientsInfoText">
+              Այս թվերը հավելվածը վերցնում է եղանակային կանխատեսումից եւ դրանցով գնահատում է կարկտի ռիսկը։
+            </p>
+          </details>
 
           <div class="control-row">
             <label for="capeInput">
@@ -130,6 +171,15 @@
             <span id="riskFactorsTitle">Ռիսկի գործոններ</span>
             <small id="confidenceValue">82% վստահություն</small>
           </div>
+          <details class="section-info">
+            <summary>
+              <span class="info-dot" aria-hidden="true">i</span>
+              <span id="riskFactorsInfoLabel">Ինչպես կարդալ</span>
+            </summary>
+            <p id="riskFactorsInfoText">
+              Գունավոր գծերը ցույց են տալիս, թե որ գործոններն են հիմա ամենաշատը բարձրացնում կարկտի ռիսկը։
+            </p>
+          </details>
           <div class="factor-list" id="factorList"></div>
         </article>
 
@@ -143,6 +193,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=14"></script>
+    <script src="app.js?v=21"></script>
   </body>
 </html>

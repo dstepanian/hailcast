@@ -14,12 +14,18 @@ const translations = {
     riskDesc: "Շրջանաձեւ ցուցիչ, որը ցույց է տալիս կարկտի հավանականությունը",
     dashboardAria: "Կանխատեսման վահանակ",
     hourlyTitle: "Ժամային կարկտի հավանականություն",
-    trackerTitle: "Ամպրոպային բջջի շարժ",
-    radarAria: "Շարժվող ռադարային քարտեզ",
+    trackerTitle: "Ամպրոպների քարտեզ",
+    radarAria: "Ամպրոպների կենդանի քարտեզ",
     legendRain: "Անձրեւ",
-    legendCore: "Միջուկ",
+    legendCore: "Ուժեղ գոտի",
     legendHail: "Կարկուտ",
+    mapInfoLabel: "Ինչպես կարդալ քարտեզը",
+    mapInfoText:
+      "Քարտեզը ցույց է տալիս մոտակա ամպրոպային գոտիների շարժը։ Կանաչը թույլ անձրեւ է, դեղինը՝ ուժեղ միջուկ, կարմիրը՝ կարկտի առավել հավանական գոտի։ Գոտիների տեղաշարժը օգնում է հասկանալ՝ ռիսկը մոտենո՞ւմ է ձեր տեղանքին։",
     ingredientsTitle: "Ավտոմատ եղանակային տվյալներ",
+    ingredientsInfoLabel: "Ինչ է սա",
+    ingredientsInfoText:
+      "Այս բաժինը ցույց է տալիս այն եղանակային տվյալները, որոնցով հավելվածը գնահատում է կարկտի ռիսկը։ Ավտո ռեժիմում դրանք թարմացվում են կանխատեսումից․ չափման սարքեր պետք չեն։ Ձեռքով ռեժիմը միայն փորձարկման համար է։",
     liveModel: "Չափում պետք չէ",
     liveForecast: "Կենդանի կանխատեսում",
     loadingForecast: "Ուսումնասիրվում է կանխատեսումը",
@@ -36,6 +42,9 @@ const translations = {
     freezingLabel: "Սառեցման մակարդակ",
     reflectivityLabel: "Ռադարային անդրադարձ",
     riskFactorsTitle: "Ռիսկի գործոններ",
+    riskFactorsInfoLabel: "Ինչպես կարդալ",
+    riskFactorsInfoText:
+      "Այս գծերը ցույց են տալիս, թե որ պայմաններն են հիմա ամենաշատը ազդում կարկտի ռիսկի վրա։ Որքան երկար է գիծը, այնքան տվյալ գործոնը ուժեղ է։ Կանաչը թույլ ազդանշան է, դեղինը՝ միջին, կարմիրը՝ բարձր։",
     dailyTitle: "5-օրյա կանխատեսում",
     dailySubtitle: "Կարկտի պոտենցիալ",
     peak: "Պիկը",
@@ -71,10 +80,11 @@ const translations = {
     },
     factorNames: ["Անկայունություն", "Խոր շերտի քամու կտրում", "Ռադարային միջուկի ուժ", "Կարկտի աճի գոտի"],
     locations: {
-      yerevan: { name: "Երեւան", locative: "Երեւանում", option: "Երեւան, Հայաստան", motion: "Շարժվում է ՀԱ 28 կմ/ժ" },
-      denver: { name: "Դենվեր", locative: "Դենվերում", option: "Դենվեր, Կոլորադո", motion: "Շարժվում է Ա 34 կմ/ժ" },
-      wichita: { name: "Վիչիտա", locative: "Վիչիտայում", option: "Վիչիտա, Կանզաս", motion: "Շարժվում է ԱՀԱ 42 կմ/ժ" },
-      munich: { name: "Մյունխեն", locative: "Մյունխենում", option: "Մյունխեն, Գերմանիա", motion: "Շարժվում է Հ 22 կմ/ժ" },
+      vanadzor: { name: "Վանաձոր", locative: "Վանաձորում", option: "Վանաձոր, Հայաստան", motion: "Շարժը՝ դեպի հյուսիս-արեւելք, 24 կմ/ժ" },
+      aparan: { name: "Ապարան", locative: "Ապարանում", option: "Ապարան, Հայաստան", motion: "Շարժը՝ դեպի արեւելք, 22 կմ/ժ" },
+      yerevan: { name: "Երեւան", locative: "Երեւանում", option: "Երեւան, Հայաստան", motion: "Շարժը՝ դեպի հյուսիս-արեւելք, 28 կմ/ժ" },
+      gyumri: { name: "Գյումրի", locative: "Գյումրիում", option: "Գյումրի, Հայաստան", motion: "Շարժը՝ դեպի հարավ-արեւելք, 26 կմ/ժ" },
+      spitak: { name: "Սպիտակ", locative: "Սպիտակում", option: "Սպիտակ, Հայաստան", motion: "Շարժը՝ դեպի արեւելք-հյուսիս-արեւելք, 25 կմ/ժ" },
       device: { name: "Իմ տեղանքը", locative: "Ձեր տեղանքում", option: "Իմ տեղանքը", motion: "Տեղանքի հիման վրա" }
     }
   },
@@ -98,7 +108,13 @@ const translations = {
     legendRain: "Rain",
     legendCore: "Core",
     legendHail: "Hail",
+    mapInfoLabel: "How to read the map",
+    mapInfoText:
+      "The map shows nearby storm areas and their movement. Green is lighter rain, yellow is a stronger storm core, and red marks the area where hail is more likely. The motion helps show whether risk is moving toward your location.",
     ingredientsTitle: "Automatic weather data",
+    ingredientsInfoLabel: "What is this?",
+    ingredientsInfoText:
+      "This section shows the weather ingredients the app uses to estimate hail risk. In Auto mode they update from the forecast, so you do not need measuring instruments. Manual mode is only for testing scenarios.",
     liveModel: "No instruments needed",
     liveForecast: "Live forecast",
     loadingForecast: "Researching forecast",
@@ -115,6 +131,9 @@ const translations = {
     freezingLabel: "Freezing level",
     reflectivityLabel: "Reflectivity",
     riskFactorsTitle: "Risk factors",
+    riskFactorsInfoLabel: "How to read this",
+    riskFactorsInfoText:
+      "These bars show which conditions are contributing most to hail risk right now. A longer bar means a stronger signal. Green is weak, yellow is moderate, and red is high.",
     dailyTitle: "5-day outlook",
     dailySubtitle: "Hail potential",
     peak: "Peak",
@@ -150,16 +169,37 @@ const translations = {
     },
     factorNames: ["Instability", "Deep-layer shear", "Radar core strength", "Hail growth zone"],
     locations: {
+      vanadzor: { name: "Vanadzor", option: "Vanadzor, Armenia", motion: "Moving NE 24 km/h" },
+      aparan: { name: "Aparan", option: "Aparan, Armenia", motion: "Moving E 22 km/h" },
       yerevan: { name: "Yerevan", option: "Yerevan, Armenia", motion: "Moving NE 28 km/h" },
-      denver: { name: "Denver", option: "Denver, Colorado", motion: "Moving E 34 km/h" },
-      wichita: { name: "Wichita", option: "Wichita, Kansas", motion: "Moving ENE 42 km/h" },
-      munich: { name: "Munich", option: "Munich, Germany", motion: "Moving N 22 km/h" },
+      gyumri: { name: "Gyumri", option: "Gyumri, Armenia", motion: "Moving SE 26 km/h" },
+      spitak: { name: "Spitak", option: "Spitak, Armenia", motion: "Moving ENE 25 km/h" },
       device: { name: "My location", option: "My location", motion: "Based on device location" }
     }
   }
 };
 
 const locations = {
+  vanadzor: {
+    latitude: 40.8128,
+    longitude: 44.4883,
+    tempC: 16,
+    cape: 1250,
+    shear: 19,
+    freezing: 2.9,
+    reflectivity: 48,
+    seed: 5
+  },
+  aparan: {
+    latitude: 40.5932,
+    longitude: 44.3589,
+    tempC: 14,
+    cape: 1100,
+    shear: 18,
+    freezing: 2.7,
+    reflectivity: 46,
+    seed: 9
+  },
   yerevan: {
     latitude: 40.1792,
     longitude: 44.4991,
@@ -170,33 +210,23 @@ const locations = {
     reflectivity: 58,
     seed: 3
   },
-  denver: {
-    latitude: 39.7392,
-    longitude: -104.9903,
-    tempC: 14,
-    cape: 1450,
-    shear: 31,
-    freezing: 2.6,
-    reflectivity: 55,
-    seed: 8
-  },
-  wichita: {
-    latitude: 37.6872,
-    longitude: -97.3301,
-    tempC: 24,
-    cape: 2850,
-    shear: 27,
-    freezing: 3.8,
-    reflectivity: 63,
+  gyumri: {
+    latitude: 40.7894,
+    longitude: 43.8475,
+    tempC: 15,
+    cape: 1200,
+    shear: 20,
+    freezing: 2.8,
+    reflectivity: 47,
     seed: 12
   },
-  munich: {
-    latitude: 48.1351,
-    longitude: 11.582,
-    tempC: 16,
-    cape: 1050,
-    shear: 18,
-    freezing: 2.9,
+  spitak: {
+    latitude: 40.8322,
+    longitude: 44.2673,
+    tempC: 15,
+    cape: 1180,
+    shear: 21,
+    freezing: 2.8,
     reflectivity: 49,
     seed: 17
   }
@@ -245,12 +275,18 @@ const els = {
   legendRain: document.querySelector("#legendRain"),
   legendCore: document.querySelector("#legendCore"),
   legendHail: document.querySelector("#legendHail"),
+  mapInfoLabel: document.querySelector("#mapInfoLabel"),
+  mapInfoText: document.querySelector("#mapInfoText"),
   ingredientsTitle: document.querySelector("#ingredientsTitle"),
+  ingredientsInfoLabel: document.querySelector("#ingredientsInfoLabel"),
+  ingredientsInfoText: document.querySelector("#ingredientsInfoText"),
   capeLabel: document.querySelector("#capeLabel"),
   shearLabel: document.querySelector("#shearLabel"),
   freezingLabel: document.querySelector("#freezingLabel"),
   reflectivityLabel: document.querySelector("#reflectivityLabel"),
   riskFactorsTitle: document.querySelector("#riskFactorsTitle"),
+  riskFactorsInfoLabel: document.querySelector("#riskFactorsInfoLabel"),
+  riskFactorsInfoText: document.querySelector("#riskFactorsInfoText"),
   dailyTitle: document.querySelector("#dailyTitle"),
   dailySubtitle: document.querySelector("#dailySubtitle"),
   capeInput: document.querySelector("#capeInput"),
@@ -266,6 +302,8 @@ const els = {
 const ctx = els.radarCanvas.getContext("2d");
 const wallpaperCanvas = document.querySelector("#weatherWallpaper");
 const weatherCtx = wallpaperCanvas.getContext("2d");
+const heroCanvas = document.querySelector("#heroWeather");
+const heroCtx = heroCanvas.getContext("2d");
 const weatherState = {
   width: 0,
   height: 0,
@@ -284,6 +322,14 @@ const weatherState = {
     glow: 0.5,
     lightning: 0.25
   }
+};
+const heroState = {
+  width: 0,
+  height: 0,
+  clouds: [],
+  rain: [],
+  hail: [],
+  shine: 0
 };
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -419,6 +465,62 @@ function updateWallpaperTarget(risk, inputs) {
     glow: clamp(normalize(inputs.cape, 300, 3600), 0.15, 1),
     lightning: clamp(normalize(inputs.cape, 900, 3000) * 0.55 + normalize(risk, 45, 88) * 0.45, 0, 1)
   };
+}
+
+function resizeHeroWeather() {
+  const ratio = window.devicePixelRatio || 1;
+  const bounds = heroCanvas.parentElement.getBoundingClientRect();
+  heroState.width = bounds.width;
+  heroState.height = bounds.height;
+  heroCanvas.width = Math.floor(heroState.width * ratio);
+  heroCanvas.height = Math.floor(heroState.height * ratio);
+  heroCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+function createHeroCloud(resetLeft = false) {
+  const width = heroState.width || heroCanvas.clientWidth || 700;
+  const height = heroState.height || heroCanvas.clientHeight || 640;
+  const cloudWidth = 180 + Math.random() * 280;
+  return {
+    x: resetLeft ? -cloudWidth - Math.random() * width * 0.3 : Math.random() * width,
+    y: 46 + Math.random() * height * 0.38,
+    width: cloudWidth,
+    height: 54 + Math.random() * 90,
+    speed: 0.12 + Math.random() * 0.28,
+    alpha: 0.12 + Math.random() * 0.16,
+    swell: Math.random() * Math.PI * 2
+  };
+}
+
+function createHeroRain(resetTop = false) {
+  const width = heroState.width || heroCanvas.clientWidth || 700;
+  const height = heroState.height || heroCanvas.clientHeight || 640;
+  return {
+    x: Math.random() * width,
+    y: resetTop ? -30 - Math.random() * height * 0.35 : Math.random() * height,
+    length: 16 + Math.random() * 30,
+    speed: 5.5 + Math.random() * 7,
+    alpha: 0.2 + Math.random() * 0.28
+  };
+}
+
+function createHeroHail(resetTop = false) {
+  const width = heroState.width || heroCanvas.clientWidth || 700;
+  const height = heroState.height || heroCanvas.clientHeight || 640;
+  return {
+    x: Math.random() * width,
+    y: resetTop ? -36 - Math.random() * height * 0.45 : Math.random() * height,
+    radius: 1.8 + Math.random() * 3.6,
+    speed: 4.2 + Math.random() * 6.8,
+    drift: -0.8 + Math.random() * 1.6,
+    alpha: 0.34 + Math.random() * 0.42
+  };
+}
+
+function seedHeroWeather() {
+  heroState.clouds = Array.from({ length: 8 }, () => createHeroCloud());
+  heroState.rain = Array.from({ length: 110 }, () => createHeroRain());
+  heroState.hail = Array.from({ length: 70 }, () => createHeroHail());
 }
 
 function openMeteoUrl(location) {
@@ -656,12 +758,18 @@ function renderStaticText() {
   els.legendRain.textContent = copy.legendRain;
   els.legendCore.textContent = copy.legendCore;
   els.legendHail.textContent = copy.legendHail;
+  els.mapInfoLabel.textContent = copy.mapInfoLabel;
+  els.mapInfoText.textContent = copy.mapInfoText;
   els.ingredientsTitle.textContent = copy.ingredientsTitle;
+  els.ingredientsInfoLabel.textContent = copy.ingredientsInfoLabel;
+  els.ingredientsInfoText.textContent = copy.ingredientsInfoText;
   els.capeLabel.textContent = copy.capeLabel;
   els.shearLabel.textContent = copy.shearLabel;
   els.freezingLabel.textContent = copy.freezingLabel;
   els.reflectivityLabel.textContent = copy.reflectivityLabel;
   els.riskFactorsTitle.textContent = copy.riskFactorsTitle;
+  els.riskFactorsInfoLabel.textContent = copy.riskFactorsInfoLabel;
+  els.riskFactorsInfoText.textContent = copy.riskFactorsInfoText;
   els.dailyTitle.textContent = copy.dailyTitle;
   els.dailySubtitle.textContent = copy.dailySubtitle;
   els.modeBtn.textContent = state.manualMode ? copy.manualMode : copy.autoMode;
@@ -1017,6 +1125,139 @@ function animateWeatherWallpaper() {
   requestAnimationFrame(animateWeatherWallpaper);
 }
 
+function paintHeroWeather(advance = true) {
+  const width = heroState.width;
+  const height = heroState.height;
+  if (!width || !height) {
+    return;
+  }
+
+  const { rain, hail, wind, glow } = weatherState.target;
+  const storm = clamp(rain * 0.72 + hail * 0.58, 0, 1);
+  const sun = clamp(1 - storm * 0.95 + glow * 0.18, 0, 1);
+  const windPush = -1.6 + wind * 3.8;
+
+  if (advance) {
+    heroState.shine += 0.008 + sun * 0.004;
+  }
+
+  heroCtx.clearRect(0, 0, width, height);
+
+  const sky = heroCtx.createLinearGradient(0, 0, width, height);
+  sky.addColorStop(0, `rgba(83, 139, 185, ${0.16 + sun * 0.1})`);
+  sky.addColorStop(0.45, `rgba(32, 72, 112, ${0.22 + storm * 0.18})`);
+  sky.addColorStop(1, `rgba(9, 20, 36, ${0.28 + storm * 0.25})`);
+  heroCtx.fillStyle = sky;
+  heroCtx.fillRect(0, 0, width, height);
+
+  const sunX = width * 0.76;
+  const sunY = height * 0.18;
+  const sunRadius = width * (0.16 + sun * 0.18);
+  const sunGlow = heroCtx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
+  sunGlow.addColorStop(0, `rgba(255, 232, 156, ${0.34 * sun})`);
+  sunGlow.addColorStop(0.38, `rgba(255, 202, 101, ${0.13 * sun})`);
+  sunGlow.addColorStop(1, "rgba(255, 232, 156, 0)");
+  heroCtx.fillStyle = sunGlow;
+  heroCtx.fillRect(0, 0, width, height);
+
+  if (sun > 0.18) {
+    heroCtx.save();
+    heroCtx.translate(sunX, sunY);
+    heroCtx.rotate(heroState.shine);
+    heroCtx.strokeStyle = `rgba(255, 236, 170, ${0.06 + sun * 0.08})`;
+    heroCtx.lineWidth = 1;
+    for (let index = 0; index < 14; index += 1) {
+      const angle = (Math.PI * 2 * index) / 14;
+      const inner = 34 + sun * 20;
+      const outer = 120 + sun * 90;
+      heroCtx.beginPath();
+      heroCtx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+      heroCtx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+      heroCtx.stroke();
+    }
+    heroCtx.restore();
+  }
+
+  heroState.clouds.forEach((cloud, index) => {
+    if (advance) {
+      cloud.x += cloud.speed * (0.8 + wind * 1.25);
+      cloud.swell += 0.01;
+    }
+    if (cloud.x - cloud.width * 0.2 > width) {
+      Object.assign(cloud, createHeroCloud(true));
+    }
+
+    const centerX = cloud.x + cloud.width * 0.5;
+    const centerY = cloud.y + Math.sin(cloud.swell + index) * 7;
+    const alpha = cloud.alpha * (0.7 + storm * 1.05);
+    const cloudGradient = heroCtx.createRadialGradient(centerX, centerY, 0, centerX, centerY, cloud.width * 0.72);
+    cloudGradient.addColorStop(0, `rgba(224, 242, 255, ${alpha})`);
+    cloudGradient.addColorStop(0.46, `rgba(150, 185, 212, ${alpha * 0.74})`);
+    cloudGradient.addColorStop(1, "rgba(150, 185, 212, 0)");
+    heroCtx.fillStyle = cloudGradient;
+    heroCtx.beginPath();
+    heroCtx.ellipse(centerX, centerY, cloud.width * 0.58, cloud.height, -0.08, 0, Math.PI * 2);
+    heroCtx.fill();
+  });
+
+  if (weatherState.lightning > 0.03) {
+    heroCtx.fillStyle = `rgba(220, 240, 255, ${weatherState.lightning * 0.18})`;
+    heroCtx.fillRect(0, 0, width, height);
+  }
+
+  const rainVisible = Math.floor(heroState.rain.length * clamp((rain - 0.08) / 0.92, 0, 1));
+  heroCtx.lineCap = "round";
+  for (let index = 0; index < rainVisible; index += 1) {
+    const drop = heroState.rain[index];
+    if (advance) {
+      drop.x += windPush;
+      drop.y += drop.speed * (0.65 + rain * 0.58);
+    }
+    if (drop.y - drop.length > height || drop.x > width + 50 || drop.x < -50) {
+      Object.assign(drop, createHeroRain(true));
+    }
+    heroCtx.strokeStyle = `rgba(190, 228, 255, ${drop.alpha * rain})`;
+    heroCtx.lineWidth = 1;
+    heroCtx.beginPath();
+    heroCtx.moveTo(drop.x, drop.y);
+    heroCtx.lineTo(drop.x - windPush * 1.6, drop.y + drop.length);
+    heroCtx.stroke();
+  }
+
+  const hailVisible = Math.floor(heroState.hail.length * clamp((hail - 0.06) / 0.94, 0, 1));
+  for (let index = 0; index < hailVisible; index += 1) {
+    const stone = heroState.hail[index];
+    if (advance) {
+      stone.x += windPush * 0.42 + stone.drift;
+      stone.y += stone.speed * (0.7 + hail * 0.55);
+    }
+    if (stone.y - stone.radius > height || stone.x > width + 40 || stone.x < -40) {
+      Object.assign(stone, createHeroHail(true));
+    }
+
+    const hailGradient = heroCtx.createRadialGradient(
+      stone.x - stone.radius * 0.4,
+      stone.y - stone.radius * 0.5,
+      0,
+      stone.x,
+      stone.y,
+      stone.radius * 1.6
+    );
+    hailGradient.addColorStop(0, `rgba(255, 255, 255, ${stone.alpha})`);
+    hailGradient.addColorStop(0.58, `rgba(198, 239, 255, ${stone.alpha * 0.74})`);
+    hailGradient.addColorStop(1, "rgba(198, 239, 255, 0)");
+    heroCtx.fillStyle = hailGradient;
+    heroCtx.beginPath();
+    heroCtx.arc(stone.x, stone.y, stone.radius, 0, Math.PI * 2);
+    heroCtx.fill();
+  }
+}
+
+function animateHeroWeather() {
+  paintHeroWeather(true);
+  requestAnimationFrame(animateHeroWeather);
+}
+
 els.locationSelect.addEventListener("change", (event) => {
   state.locationKey = event.target.value;
   setInputs(locations[state.locationKey]);
@@ -1102,14 +1343,21 @@ els.refreshBtn.addEventListener("click", async () => {
 window.addEventListener("resize", () => {
   resizeWeatherWallpaper();
   seedWeatherWallpaper();
+  resizeHeroWeather();
+  seedHeroWeather();
+  paintHeroWeather(false);
 });
 
 resizeWeatherWallpaper();
 seedWeatherWallpaper();
+resizeHeroWeather();
+seedHeroWeather();
 setInputs(locations[state.locationKey]);
 render();
+paintHeroWeather(false);
 fetchLiveForecast(state.locationKey);
 animateRadar();
 if (!reduceMotion) {
   animateWeatherWallpaper();
+  animateHeroWeather();
 }
