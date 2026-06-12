@@ -610,17 +610,19 @@ input[type="range"] {
 
 @media (max-width: 900px) {
   .app-shell {
-    width: min(100% - 18px, 680px);
-    padding-top: 9px;
+    width: min(100% - 16px, 680px);
+    padding: 8px 0 28px;
   }
 
   .hero-panel {
-    min-height: 680px;
+    min-height: min(680px, calc(100svh - 16px));
     border-radius: 28px;
   }
 
   .content-grid {
     grid-template-columns: 1fr;
+    margin-top: 12px;
+    gap: 12px;
   }
 
   .risk-orb {
@@ -636,12 +638,22 @@ input[type="range"] {
 }
 
 @media (max-width: 620px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .app-shell {
+    width: 100%;
+    padding: 0 8px 24px;
+  }
+
   .topbar {
     align-items: stretch;
     display: grid;
-    grid-template-columns: 44px 44px 44px 1fr;
+    grid-template-columns: repeat(3, 44px) 1fr;
+    justify-content: start;
     gap: 8px;
-    padding: 12px;
+    padding: 12px 12px 10px;
   }
 
   .icon-button {
@@ -663,7 +675,8 @@ input[type="range"] {
     grid-row: 2;
     grid-template-columns: 1fr;
     gap: 0;
-    max-width: 100%;
+    width: 100%;
+    max-width: calc(100vw - 40px);
     min-height: 50px;
     padding: 8px 14px;
   }
@@ -677,7 +690,7 @@ input[type="range"] {
   .hero-copy {
     width: 100%;
     margin-top: auto;
-    padding: 0 22px 150px;
+    padding: 0 22px 148px;
   }
 
   .risk-orb {
@@ -693,7 +706,8 @@ input[type="range"] {
   .hero-panel {
     display: flex;
     flex-direction: column;
-    min-height: 730px;
+    min-height: min(728px, calc(100svh - 10px));
+    border-radius: 24px;
   }
 
   #riskValue {
@@ -707,20 +721,26 @@ input[type="range"] {
   }
 
   .temp-line {
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: end;
     gap: 8px 12px;
   }
 
   #conditionText {
-    flex: 1 1 170px;
-    max-width: 210px;
+    max-width: 190px;
     font-size: 18px;
     line-height: 1.18;
+  }
+
+  #currentTemp {
+    font-size: clamp(62px, 18vw, 76px);
   }
 
   .hourly-strip {
     grid-auto-columns: 76px;
     padding: 10px;
+    scroll-padding-inline: 10px;
   }
 
   .hour-cell {
@@ -731,6 +751,7 @@ input[type="range"] {
 
   .glass-card {
     border-radius: 18px;
+    overflow: hidden;
   }
 
   .card-heading {
@@ -738,10 +759,41 @@ input[type="range"] {
     padding: 14px 14px 10px;
     font-size: 11px;
     letter-spacing: 0.06em;
+    gap: 8px;
+  }
+
+  .card-heading span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .card-heading small {
+    text-align: right;
+  }
+
+  .section-info {
+    margin-inline: 14px;
+  }
+
+  .section-info p {
+    margin-left: 0;
+  }
+
+  #radarCanvas {
+    height: 320px;
+    min-height: 300px;
+  }
+
+  .map-legend {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 0 14px 14px;
   }
 
   .heading-actions {
     gap: 6px;
+    justify-content: end;
+    min-width: 0;
   }
 
   .mode-button {
@@ -754,7 +806,45 @@ input[type="range"] {
     padding: 14px 14px 2px;
   }
 
+  .control-row label,
+  .factor {
+    gap: 6px 10px;
+  }
+
+  .control-row label {
+    align-items: flex-start;
+  }
+
+  .control-row label span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   .daily-row {
     grid-template-columns: 72px 1fr 48px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-copy {
+    padding-inline: 18px;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  #conditionText {
+    max-width: 170px;
+    font-size: 17px;
+  }
+
+  #riskNarrative {
+    max-width: 100%;
+  }
+
+  .risk-orb {
+    left: 18px;
   }
 }
