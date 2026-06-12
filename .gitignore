@@ -1,0 +1,24 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency/build folders
+node_modules/
+dist/
+build/
+.vite/
+
+# Local environment
+.env
+.env.*
+
+# Temporary QA screenshots
+hf-*.png
+*-check.png

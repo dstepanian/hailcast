@@ -1,0 +1,19 @@
+{
+  "name": "hailcast",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile-friendly hail forecasting web app with live forecast data and animated weather wallpaper.",
+  "type": "module",
+  "scripts": {
+    "start": "python -m http.server 4173 --bind 127.0.0.1",
+    "check": "node --check app.js"
+  },
+  "keywords": [
+    "weather",
+    "hail",
+    "forecast",
+    "armenia",
+    "open-meteo"
+  ],
+  "license": "MIT"
+}

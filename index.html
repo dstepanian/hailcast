@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HailCast</title>
+    <link rel="preload" href="assets/storm-backdrop.png" as="image" />
+    <link rel="stylesheet" href="styles.css?v=16" />
+  </head>
+  <body>
+    <canvas id="weatherWallpaper" aria-hidden="true"></canvas>
+    <main class="app-shell">
+      <section class="hero-panel" aria-labelledby="app-title">
+        <div class="topbar">
+          <button class="icon-button" type="button" id="refreshBtn" aria-label="Թարմացնել կանխատեսումը">
+            <span aria-hidden="true">↻</span>
+          </button>
+          <button class="icon-button" type="button" id="locateBtn" aria-label="Օգտագործել սարքի տեղանքը">
+            <span aria-hidden="true">⌖</span>
+          </button>
+          <button class="icon-button lang-button" type="button" id="langBtn" aria-label="Switch to English">
+            <span id="langLabel">EN</span>
+          </button>
+          <div class="location-picker">
+            <label for="locationSelect" id="locationLabel">Տեղանք</label>
+            <select id="locationSelect" aria-label="Ընտրել կանխատեսման տեղանքը">
+              <option value="yerevan">Yerevan, Armenia</option>
+              <option value="denver">Denver, Colorado</option>
+              <option value="wichita">Wichita, Kansas</option>
+              <option value="munich">Munich, Germany</option>
+            </select>
+          </div>
+          <button class="icon-button" type="button" id="unitBtn" aria-label="Փոխել ջերմաստիճանի միավորը">
+            <span id="unitLabel">°C</span>
+          </button>
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow" id="eyebrowText">Կարկտային ռիսկի կանխատեսում</p>
+          <h1 id="app-title">HailCast</h1>
+          <div class="temp-line">
+            <span id="currentTemp">18°</span>
+            <span id="conditionText">Բարձր կարկտային միջավայր</span>
+          </div>
+          <p id="riskNarrative">
+            Ուժեղ վերընթաց հոսքեր հնարավոր են ուշ կեսօրին, կարկտի ամենահավանական պատուհանը՝ 16:00-ից հետո։
+          </p>
+        </div>
+
+        <div class="risk-orb" id="riskOrb" aria-label="Ընթացիկ կարկտային ռիսկ">
+          <svg viewBox="0 0 220 220" role="img" aria-labelledby="riskTitle riskDesc">
+            <title id="riskTitle">Ընթացիկ կարկտային ռիսկ</title>
+            <desc id="riskDesc">Շրջանաձեւ ցուցիչ, որը ցույց է տալիս կարկտի հավանականությունը</desc>
+            <circle class="gauge-track" cx="110" cy="110" r="92"></circle>
+            <circle class="gauge-fill" id="riskGauge" cx="110" cy="110" r="92"></circle>
+          </svg>
+          <div class="risk-text">
+            <span id="riskValue">64%</span>
+            <small id="riskLabelText">Կարկտի ռիսկ</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-grid" id="forecastDashboard" aria-label="Կանխատեսման վահանակ">
+        <article class="glass-card hourly-card">
+          <div class="card-heading">
+            <span id="hourlyTitle">Ժամային կարկտի հավանականություն</span>
+            <small id="peakTime">Պիկը 17:00</small>
+          </div>
+          <div class="hourly-strip" id="hourlyStrip"></div>
+        </article>
+
+        <article class="glass-card map-card">
+          <div class="card-heading">
+            <span id="trackerTitle">Ամպրոպային բջջի շարժ</span>
+            <small id="stormMotion">Շարժվում է ՀԱ 28 կմ/ժ</small>
+          </div>
+          <canvas id="radarCanvas" width="760" height="520" aria-label="Շարժվող ռադարային քարտեզ"></canvas>
+          <div class="map-legend" aria-hidden="true">
+            <span><i class="legend-low"></i><b id="legendRain">Անձրեւ</b></span>
+            <span><i class="legend-mid"></i><b id="legendCore">Միջուկ</b></span>
+            <span><i class="legend-high"></i><b id="legendHail">Կարկուտ</b></span>
+          </div>
+        </article>
+
+        <article class="glass-card controls-card" id="controlsCard">
+          <div class="card-heading">
+            <span id="ingredientsTitle">Ամպրոպի գործոններ</span>
+            <div class="heading-actions">
+              <small id="modelStatus">Կենդանի մոդել</small>
+              <button class="mode-button" type="button" id="modeBtn">Ավտո</button>
+            </div>
+          </div>
+
+          <div class="control-row">
+            <label for="capeInput">
+              <span id="capeLabel">Անկայունություն</span>
+              <strong id="capeValue">1800 J/kg</strong>
+            </label>
+            <input id="capeInput" type="range" min="300" max="3600" step="50" value="1800" />
+          </div>
+
+          <div class="control-row">
+            <label for="shearInput">
+              <span id="shearLabel">Քամու շերտային կտրում</span>
+              <strong id="shearValue">22 m/s</strong>
+            </label>
+            <input id="shearInput" type="range" min="5" max="42" step="1" value="22" />
+          </div>
+
+          <div class="control-row">
+            <label for="freezingInput">
+              <span id="freezingLabel">Սառեցման մակարդակ</span>
+              <strong id="freezingValue">3.1 km</strong>
+            </label>
+            <input id="freezingInput" type="range" min="1.8" max="5.2" step="0.1" value="3.1" />
+          </div>
+
+          <div class="control-row">
+            <label for="reflectivityInput">
+              <span id="reflectivityLabel">Ռադարային անդրադարձ</span>
+              <strong id="reflectivityValue">58 dBZ</strong>
+            </label>
+            <input id="reflectivityInput" type="range" min="25" max="72" step="1" value="58" />
+          </div>
+        </article>
+
+        <article class="glass-card insight-card">
+          <div class="card-heading">
+            <span id="riskFactorsTitle">Ռիսկի գործոններ</span>
+            <small id="confidenceValue">82% վստահություն</small>
+          </div>
+          <div class="factor-list" id="factorList"></div>
+        </article>
+
+        <article class="glass-card daily-card">
+          <div class="card-heading">
+            <span id="dailyTitle">5-օրյա կանխատեսում</span>
+            <small id="dailySubtitle">Կարկտի պոտենցիալ</small>
+          </div>
+          <div class="daily-list" id="dailyList"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js?v=14"></script>
+  </body>
+</html>

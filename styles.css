@@ -1,0 +1,699 @@
+:root {
+  color-scheme: dark;
+  --text: rgba(255, 255, 255, 0.96);
+  --muted: rgba(255, 255, 255, 0.68);
+  --soft: rgba(255, 255, 255, 0.14);
+  --softer: rgba(255, 255, 255, 0.09);
+  --stroke: rgba(255, 255, 255, 0.2);
+  --storm: #7cc7ff;
+  --hail: #f8fbff;
+  --warning: #ffd166;
+  --danger: #ff6b6b;
+  --good: #5ee0a0;
+  --ink: #101620;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #0c121a;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(8, 13, 22, 0.2), rgba(8, 13, 22, 0.86)),
+    url("assets/storm-backdrop.png") center / cover fixed,
+    #0c121a;
+  overflow-x: hidden;
+}
+
+#weatherWallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.88;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 18px 0 32px;
+}
+
+.hero-panel {
+  position: relative;
+  min-height: min(640px, calc(100vh - 30px));
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 74% 18%, rgba(124, 199, 255, 0.24), transparent 34%),
+    linear-gradient(180deg, rgba(13, 23, 36, 0.16), rgba(13, 23, 36, 0.72));
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  background: linear-gradient(0deg, rgba(8, 12, 20, 0.74), transparent);
+  pointer-events: none;
+}
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+}
+
+.icon-button,
+.location-picker {
+  min-height: 48px;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  background: rgba(10, 18, 29, 0.38);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+}
+
+.icon-button {
+  width: 48px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.icon-button span {
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.icon-button:disabled {
+  cursor: progress;
+  opacity: 0.55;
+}
+
+.location-picker {
+  flex: 0 1 360px;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.location-picker label {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.location-picker select {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  background: transparent;
+  appearance: none;
+}
+
+.location-picker option {
+  color: var(--ink);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  max-width: 720px;
+  padding: 0 34px 42px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(54px, 10vw, 132px);
+  font-weight: 760;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.temp-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+#currentTemp {
+  font-size: clamp(64px, 12vw, 152px);
+  line-height: 0.88;
+  font-weight: 300;
+}
+
+#conditionText {
+  max-width: 320px;
+  color: var(--muted);
+  font-size: clamp(19px, 3vw, 30px);
+  line-height: 1.1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#riskNarrative {
+  max-width: 610px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.risk-orb {
+  position: absolute;
+  z-index: 2;
+  right: 34px;
+  bottom: 42px;
+  width: 186px;
+  height: 186px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--stroke);
+  border-radius: 50%;
+  background: rgba(9, 17, 27, 0.32);
+  backdrop-filter: blur(22px);
+}
+
+.risk-orb svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-track,
+.gauge-fill {
+  fill: none;
+  stroke-width: 16;
+}
+
+.gauge-track {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.gauge-fill {
+  stroke: var(--warning);
+  stroke-linecap: round;
+  stroke-dasharray: 578;
+  stroke-dashoffset: 208;
+  filter: drop-shadow(0 0 10px rgba(255, 209, 102, 0.46));
+  transition: stroke-dashoffset 450ms ease, stroke 450ms ease;
+}
+
+.risk-text {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+#riskValue {
+  font-size: 40px;
+  font-weight: 720;
+}
+
+.risk-text small,
+.card-heading small {
+  color: var(--muted);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.9fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.glass-card {
+  border: 1px solid var(--stroke);
+  border-radius: 22px;
+  background: rgba(13, 22, 34, 0.56);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(26px);
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 58px;
+  padding: 17px 18px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heading-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mode-button {
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hourly-card {
+  grid-column: 1 / -1;
+}
+
+.hourly-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(74px, 1fr);
+  gap: 8px;
+  overflow-x: auto;
+  padding: 14px;
+  scrollbar-width: thin;
+}
+
+.hour-cell {
+  min-height: 150px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 8px;
+  justify-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 13px 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hour-cell.is-peak {
+  background: linear-gradient(180deg, rgba(255, 209, 102, 0.24), rgba(255, 255, 255, 0.09));
+  border-color: rgba(255, 209, 102, 0.42);
+}
+
+.hour-time,
+.hour-temp,
+.daily-day,
+.daily-meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hail-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 32%, #ffffff, #c6f0ff 36%, rgba(124, 199, 255, 0.08) 37%),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 18px rgba(124, 199, 255, 0.34),
+    inset -4px -5px 10px rgba(35, 84, 120, 0.32);
+}
+
+.hour-risk {
+  font-size: 22px;
+  font-weight: 740;
+}
+
+.map-card {
+  min-height: 430px;
+  overflow: hidden;
+}
+
+#radarCanvas {
+  display: block;
+  width: 100%;
+  height: min(420px, 58vw);
+  min-height: 320px;
+}
+
+.map-legend {
+  display: flex;
+  gap: 14px;
+  padding: 0 18px 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.map-legend i {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.legend-low {
+  background: var(--good);
+}
+
+.legend-mid {
+  background: var(--warning);
+}
+
+.legend-high {
+  background: var(--danger);
+}
+
+.controls-card,
+.insight-card,
+.daily-card {
+  min-height: 240px;
+}
+
+.control-row {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px 4px;
+}
+
+.control-row:last-child {
+  padding-bottom: 18px;
+}
+
+.control-row label {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.control-row strong {
+  color: var(--text);
+  font-weight: 720;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--storm);
+}
+
+.controls-card.is-auto input[type="range"] {
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.controls-card.is-auto input[type="range"]::-webkit-slider-thumb {
+  opacity: 0;
+}
+
+.controls-card.is-auto input[type="range"]::-moz-range-thumb {
+  opacity: 0;
+}
+
+.controls-card.is-auto .control-row label span::after {
+  content: " auto";
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.factor-list {
+  display: grid;
+  gap: 10px;
+  padding: 14px 18px 18px;
+}
+
+.factor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+}
+
+.factor span {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+}
+
+.factor strong {
+  font-size: 14px;
+}
+
+.meter {
+  grid-column: 1 / -1;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.meter i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--good), var(--warning), var(--danger));
+}
+
+.daily-card {
+  grid-column: 1 / -1;
+}
+
+.daily-list {
+  display: grid;
+  gap: 2px;
+  padding: 8px 18px 18px;
+}
+
+.daily-row {
+  display: grid;
+  grid-template-columns: 92px 1fr 54px;
+  align-items: center;
+  gap: 14px;
+  min-height: 46px;
+}
+
+.daily-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.daily-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7cc7ff, #ffd166, #ff6b6b);
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    width: min(100% - 18px, 680px);
+    padding-top: 9px;
+  }
+
+  .hero-panel {
+    min-height: 680px;
+    border-radius: 28px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-orb {
+    right: 22px;
+    bottom: 210px;
+    width: 142px;
+    height: 142px;
+  }
+
+  #riskValue {
+    font-size: 31px;
+  }
+}
+
+@media (max-width: 620px) {
+  .topbar {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 44px 44px 44px 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .icon-button {
+    min-height: 44px;
+    width: 44px;
+  }
+
+  #unitBtn {
+    display: none;
+  }
+
+  #langBtn {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .location-picker {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 100%;
+    min-height: 50px;
+    padding: 8px 14px;
+  }
+
+  .location-picker select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-copy {
+    width: 100%;
+    margin-top: auto;
+    padding: 0 22px 150px;
+  }
+
+  .risk-orb {
+    position: absolute;
+    left: 22px;
+    right: auto;
+    bottom: 28px;
+    width: 124px;
+    height: 124px;
+    margin: 0;
+  }
+
+  .hero-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 730px;
+  }
+
+  #riskValue {
+    font-size: 28px;
+  }
+
+  #riskNarrative {
+    max-width: min(100%, 310px);
+    font-size: 16px;
+    line-height: 1.42;
+  }
+
+  .temp-line {
+    align-items: flex-start;
+    gap: 8px 12px;
+  }
+
+  #conditionText {
+    flex: 1 1 170px;
+    max-width: 210px;
+    font-size: 18px;
+    line-height: 1.18;
+  }
+
+  .hourly-strip {
+    grid-auto-columns: 76px;
+    padding: 10px;
+  }
+
+  .hour-cell {
+    min-height: 132px;
+    border-radius: 14px;
+    padding: 10px 6px;
+  }
+
+  .glass-card {
+    border-radius: 18px;
+  }
+
+  .card-heading {
+    min-height: 52px;
+    padding: 14px 14px 10px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .heading-actions {
+    gap: 6px;
+  }
+
+  .mode-button {
+    min-height: 28px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .control-row {
+    padding: 14px 14px 2px;
+  }
+
+  .daily-row {
+    grid-template-columns: 72px 1fr 48px;
+  }
+}
