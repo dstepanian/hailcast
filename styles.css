@@ -59,6 +59,30 @@ input {
   padding: 18px 0 32px;
 }
 
+.site-credit {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 28px));
+  margin: -14px auto 28px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.site-credit a {
+  color: rgba(225, 244, 255, 0.92);
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.site-credit a:hover,
+.site-credit a:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .hero-panel {
   position: relative;
   min-height: min(640px, calc(100vh - 30px));
@@ -614,6 +638,11 @@ input[type="range"] {
     padding: 8px 0 28px;
   }
 
+  .site-credit {
+    width: min(100% - 16px, 680px);
+    margin-top: -12px;
+  }
+
   .hero-panel {
     min-height: min(680px, calc(100svh - 16px));
     border-radius: 28px;
@@ -645,6 +674,12 @@ input[type="range"] {
   .app-shell {
     width: 100%;
     padding: 0 8px 24px;
+  }
+
+  .site-credit {
+    width: calc(100% - 28px);
+    margin: -8px auto 24px;
+    font-size: 12px;
   }
 
   .topbar {

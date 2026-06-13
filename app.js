@@ -47,6 +47,7 @@ const translations = {
       "Այս գծերը ցույց են տալիս, թե որ պայմաններն են հիմա ամենաշատը ազդում կարկտի ռիսկի վրա։ Որքան երկար է գիծը, այնքան տվյալ գործոնը ուժեղ է։ Կանաչը թույլ ազդանշան է, դեղինը՝ միջին, կարմիրը՝ բարձր։",
     dailyTitle: "5-օրյա կանխատեսում",
     dailySubtitle: "Կարկտի պոտենցիալ",
+    creditText: "Կայքը նախագծվել եւ ստեղծվել է",
     peak: "Պիկը",
     confidence: "վստահություն",
     days: ["Այսօր", "Շբթ", "Կիր", "Երկ", "Երք"],
@@ -136,6 +137,7 @@ const translations = {
       "These bars show which conditions are contributing most to hail risk right now. A longer bar means a stronger signal. Green is weak, yellow is moderate, and red is high.",
     dailyTitle: "5-day outlook",
     dailySubtitle: "Hail potential",
+    creditText: "Site designed and created by",
     peak: "Peak",
     confidence: "confidence",
     days: ["Today", "Sat", "Sun", "Mon", "Tue"],
@@ -289,6 +291,7 @@ const els = {
   riskFactorsInfoText: document.querySelector("#riskFactorsInfoText"),
   dailyTitle: document.querySelector("#dailyTitle"),
   dailySubtitle: document.querySelector("#dailySubtitle"),
+  creditText: document.querySelector("#creditText"),
   capeInput: document.querySelector("#capeInput"),
   shearInput: document.querySelector("#shearInput"),
   freezingInput: document.querySelector("#freezingInput"),
@@ -772,6 +775,7 @@ function renderStaticText() {
   els.riskFactorsInfoText.textContent = copy.riskFactorsInfoText;
   els.dailyTitle.textContent = copy.dailyTitle;
   els.dailySubtitle.textContent = copy.dailySubtitle;
+  els.creditText.textContent = copy.creditText;
   els.modeBtn.textContent = state.manualMode ? copy.manualMode : copy.autoMode;
   els.controlsCard.classList.toggle("is-auto", !state.manualMode);
   els.controlsCard.classList.toggle("is-manual", state.manualMode);
